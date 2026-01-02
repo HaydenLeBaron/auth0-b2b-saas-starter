@@ -4,9 +4,9 @@ import { $ } from "execa"
 import ora from "ora"
 
 const APP_BASE_URL = "http://localhost:3000"
-const MANAGEMENT_CLIENT_NAME = "SaaStart Management"
-const DASHBOARD_CLIENT_NAME = "SaaStart Dashboard"
-const DEFAULT_CONNECTION_NAME = "SaaStart-Shared-Database"
+const MANAGEMENT_CLIENT_NAME = "Thesaurizate Management"
+const DASHBOARD_CLIENT_NAME = "Thesaurizate Dashboard"
+const DEFAULT_CONNECTION_NAME = "Thesaurizate-Shared-Database"
 const CUSTOM_CLAIMS_NAMESPACE = "https://example.com"
 
 // checks
@@ -56,7 +56,7 @@ try {
     "--data", JSON.stringify({
       "customize_mfa_in_postlogin_action": true,
       "flags": { "enable_client_connections": false },
-      "friendly_name": "SaaStart",
+      "friendly_name": "Thesaurizate",
       "picture_url": "https://cdn.auth0.com/blog/auth0_by_okta_logo_black.png",
     }),
   ];
@@ -102,7 +102,7 @@ try {
   const createClientArgs = [
     "apps", "create",
     "--name", MANAGEMENT_CLIENT_NAME,
-    "--description", "The SaaStart client to manage tenant resources and facilitate account creation.",
+    "--description", "The Thesaurizate client to manage tenant resources and facilitate account creation.",
     "--callbacks", `${APP_BASE_URL}/onboarding/callback`,
     "--logout-urls", APP_BASE_URL,
     "--type", "regular",
@@ -201,7 +201,7 @@ try {
       "initiate_login_uri": "https://example.com/auth/login",
       "app_type": "regular_web",
       "oidc_conformant": true,
-      "grant_types": ["authorization_code","refresh_token"],
+      "grant_types": ["authorization_code", "refresh_token"],
       "organization_require_behavior": "post_login_prompt",
       "organization_usage": "require",
       "jwt_configuration": {
@@ -236,7 +236,7 @@ try {
     "--data", JSON.stringify({
       strategy: "auth0",
       name: DEFAULT_CONNECTION_NAME,
-      display_name: "SaaStart",
+      display_name: "Thesaurizate",
       enabled_clients: [dashboardClient.client_id, managementClient.client_id],
     }),
   ];
@@ -542,14 +542,14 @@ try {
   const createVerifyEmailTemplateArgs = [
     "api", "post", "email-templates",
     "--data", JSON.stringify({
-        "template": "verify_email",
-        "syntax": "liquid",
-        "body": `<html>\n  <head>\n    <style type=\"text/css\">\n      .ExternalClass,.ExternalClass div,.ExternalClass font,.ExternalClass p,.ExternalClass span,.ExternalClass td,img {line-height: 100%;}#outlook a {padding: 0;}.ExternalClass,.ReadMsgBody {width: 100%;}a,blockquote,body,li,p,table,td {-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;}table,td {mso-table-lspace: 0;mso-table-rspace: 0;}img {-ms-interpolation-mode: bicubic;border: 0;height: auto;outline: 0;text-decoration: none;}table {border-collapse: collapse !important;}#bodyCell,#bodyTable,body {height: 100% !important;margin: 0;padding: 0;font-family: ProximaNova, sans-serif;}#bodyCell {padding: 20px;}#bodyTable {width: 600px;}@font-face {font-family: ProximaNova;src: url(https://cdn.auth0.com/fonts/proxima-nova/proximanova-regular-webfont-webfont.eot);src: url(https://cdn.auth0.com/fonts/proxima-nova/proximanova-regular-webfont-webfont.eot?#iefix)format(\"embedded-opentype\"),url(https://cdn.auth0.com/fonts/proxima-nova/proximanova-regular-webfont-webfont.woff) format(\"woff\");font-weight: 400;font-style: normal;}@font-face {font-family: ProximaNova;src: url(https://cdn.auth0.com/fonts/proxima-nova/proximanova-semibold-webfont-webfont.eot);src: url(https://cdn.auth0.com/fonts/proxima-nova/proximanova-semibold-webfont-webfont.eot?#iefix)format(\"embedded-opentype\"),url(https://cdn.auth0.com/fonts/proxima-nova/proximanova-semibold-webfont-webfont.woff) format(\"woff\");font-weight: 600;font-style: normal;}@media only screen and (max-width: 480px) {#bodyTable,body {width: 100% !important;}a,blockquote,body,li,p,table,td {-webkit-text-size-adjust: none !important;}body {min-width: 100% !important;}#bodyTable {max-width: 600px !important;}#signIn {max-width: 280px !important;}}\n    </style>\n  </head>\n  <body>\n    <center>\n      <table\n        style='width: 600px;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;margin: 0;padding: 0;font-family: \"ProximaNova\", sans-serif;border-collapse: collapse !important;height: 100% !important;'\n        align=\"center\"\n        border=\"0\"\n        cellpadding=\"0\"\n        cellspacing=\"0\"\n        height=\"100%\"\n        width=\"100%\"\n        id=\"bodyTable\"\n      >\n        <tr>\n          <td\n            align=\"center\"\n            valign=\"top\"\n            id=\"bodyCell\"\n            style='-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;margin: 0;padding: 20px;font-family: \"ProximaNova\", sans-serif;height: 100% !important;'\n          >\n            <div class=\"main\">\n              <p\n                style=\"text-align: center;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%; margin-bottom: 30px;\"\n              >\n                <img\n                  src=\"https://cdn.auth0.com/styleguide/2.0.9/lib/logos/img/badge.png\"\n                  width=\"50\"\n                  alt=\"Your logo goes here\"\n                  style=\"-ms-interpolation-mode: bicubic;border: 0;height: auto;line-height: 100%;outline: none;text-decoration: none;\"\n                />\n              </p>\n\n              <h1>Welcome to {{ application.name}}!</h1>\n\n              <p>Thank you for signing up. Please verify your email address by clicking the following link:</p>\n\n              <p><a href=\"{{ url }}\">Confirm my account</a></p>\n\n              <p>\n                If you are having any issues with your account, please don’t hesitate to contact us by replying to\n                this mail.\n              </p>\n\n              <br />\n              Thanks!\n              <br />\n\n              <strong>{{ application.name }}</strong>\n\n              <br /><br />\n              <hr style=\"border: 2px solid #EAEEF3; border-bottom: 0; margin: 20px 0;\" />\n              <p style=\"text-align: center;color: #A9B3BC;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;\">\n                If you did not make this request, please contact us by replying to this mail.\n              </p>\n            </div>\n          </td>\n        </tr>\n      </table>\n    </center>\n  </body>\n</html>`,
-        "from": "",
-        "subject": "",
-        "resultUrl": `{{ application.callback_domain }}/onboarding/create`,
-        "urlLifetimeInSeconds": 432000,
-        "enabled": true
+      "template": "verify_email",
+      "syntax": "liquid",
+      "body": `<html>\n  <head>\n    <style type=\"text/css\">\n      .ExternalClass,.ExternalClass div,.ExternalClass font,.ExternalClass p,.ExternalClass span,.ExternalClass td,img {line-height: 100%;}#outlook a {padding: 0;}.ExternalClass,.ReadMsgBody {width: 100%;}a,blockquote,body,li,p,table,td {-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;}table,td {mso-table-lspace: 0;mso-table-rspace: 0;}img {-ms-interpolation-mode: bicubic;border: 0;height: auto;outline: 0;text-decoration: none;}table {border-collapse: collapse !important;}#bodyCell,#bodyTable,body {height: 100% !important;margin: 0;padding: 0;font-family: ProximaNova, sans-serif;}#bodyCell {padding: 20px;}#bodyTable {width: 600px;}@font-face {font-family: ProximaNova;src: url(https://cdn.auth0.com/fonts/proxima-nova/proximanova-regular-webfont-webfont.eot);src: url(https://cdn.auth0.com/fonts/proxima-nova/proximanova-regular-webfont-webfont.eot?#iefix)format(\"embedded-opentype\"),url(https://cdn.auth0.com/fonts/proxima-nova/proximanova-regular-webfont-webfont.woff) format(\"woff\");font-weight: 400;font-style: normal;}@font-face {font-family: ProximaNova;src: url(https://cdn.auth0.com/fonts/proxima-nova/proximanova-semibold-webfont-webfont.eot);src: url(https://cdn.auth0.com/fonts/proxima-nova/proximanova-semibold-webfont-webfont.eot?#iefix)format(\"embedded-opentype\"),url(https://cdn.auth0.com/fonts/proxima-nova/proximanova-semibold-webfont-webfont.woff) format(\"woff\");font-weight: 600;font-style: normal;}@media only screen and (max-width: 480px) {#bodyTable,body {width: 100% !important;}a,blockquote,body,li,p,table,td {-webkit-text-size-adjust: none !important;}body {min-width: 100% !important;}#bodyTable {max-width: 600px !important;}#signIn {max-width: 280px !important;}}\n    </style>\n  </head>\n  <body>\n    <center>\n      <table\n        style='width: 600px;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;margin: 0;padding: 0;font-family: \"ProximaNova\", sans-serif;border-collapse: collapse !important;height: 100% !important;'\n        align=\"center\"\n        border=\"0\"\n        cellpadding=\"0\"\n        cellspacing=\"0\"\n        height=\"100%\"\n        width=\"100%\"\n        id=\"bodyTable\"\n      >\n        <tr>\n          <td\n            align=\"center\"\n            valign=\"top\"\n            id=\"bodyCell\"\n            style='-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;margin: 0;padding: 20px;font-family: \"ProximaNova\", sans-serif;height: 100% !important;'\n          >\n            <div class=\"main\">\n              <p\n                style=\"text-align: center;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%; margin-bottom: 30px;\"\n              >\n                <img\n                  src=\"https://cdn.auth0.com/styleguide/2.0.9/lib/logos/img/badge.png\"\n                  width=\"50\"\n                  alt=\"Your logo goes here\"\n                  style=\"-ms-interpolation-mode: bicubic;border: 0;height: auto;line-height: 100%;outline: none;text-decoration: none;\"\n                />\n              </p>\n\n              <h1>Welcome to {{ application.name}}!</h1>\n\n              <p>Thank you for signing up. Please verify your email address by clicking the following link:</p>\n\n              <p><a href=\"{{ url }}\">Confirm my account</a></p>\n\n              <p>\n                If you are having any issues with your account, please don’t hesitate to contact us by replying to\n                this mail.\n              </p>\n\n              <br />\n              Thanks!\n              <br />\n\n              <strong>{{ application.name }}</strong>\n\n              <br /><br />\n              <hr style=\"border: 2px solid #EAEEF3; border-bottom: 0; margin: 20px 0;\" />\n              <p style=\"text-align: center;color: #A9B3BC;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;\">\n                If you did not make this request, please contact us by replying to this mail.\n              </p>\n            </div>\n          </td>\n        </tr>\n      </table>\n    </center>\n  </body>\n</html>`,
+      "from": "",
+      "subject": "",
+      "resultUrl": `{{ application.callback_domain }}/onboarding/create`,
+      "urlLifetimeInSeconds": 432000,
+      "enabled": true
     }),
   ];
 

@@ -29,34 +29,33 @@ export default async function Home() {
           className="text-sm underline"
           href="/auth/login?returnTo=/dashboard"
         >
-          <SubmitButton>Log in</SubmitButton>
-        </a>
+            <SubmitButton>Log in</SubmitButton>
+          </a>
         </div>
       )}
 
       <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
-        <div className="absolute inset-0 bg-black" />
+        <div className="absolute inset-0 bg-primary dark:bg-background" />
         <div className="relative z-20 flex items-center text-lg font-medium">
           <Auth0Logo className="mr-2 size-8" />
-          <span className="font-semibold">SaaStart</span>
+          <span className="font-semibold">Thesaurizate</span>
         </div>
         <div className="relative z-20 m-auto max-w-sm text-center">
           <blockquote className="space-y-2">
             <div className="space-y-8">
               <p className="text-lg font-medium">
-                SaaStart is a reference B2B SaaS application built using Next.js
-                and Auth0 by Okta.
+                Thesaurizate is a Treasury as a Service platform. app/page.tsx
               </p>
-              <p className="text-lg">
+              {/* <p className="text-lg">
                 It features multi-tenancy support, user management and access
                 controls, security policies, self-service Single Sign-On
                 configuration and more out-of-the-box.
-              </p>
+              </p> */}
             </div>
           </blockquote>
         </div>
       </div>
-      <div className="lg:p-8 flex h-screen">
+      <div className="lg:p-8 flex h-screen bg-white dark:bg-black">
         {session ? <WelcomeBackCard /> : <SignUpForm />}
       </div>
     </div>
